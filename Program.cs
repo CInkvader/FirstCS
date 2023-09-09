@@ -20,6 +20,10 @@ namespace FirstCS
 
         public BingoTable(int maxNumber = 75)
         {
+            if (maxNumber < 75)
+            {
+                maxNumber = 75;
+            }
             this.maxNumber = maxNumber;
             
             possibleNumbers = new int[this.maxNumber];
@@ -52,6 +56,8 @@ namespace FirstCS
         private void generateTable()
         {
             int randomIndex;
+            int minMaxRange = maxNumber / TABLE_ROW_COLUMN;
+
             List<int> selectedIndices = new List<int>();
 
             for (int i = 0; i < TABLE_ROW_COLUMN; i++)
@@ -64,7 +70,7 @@ namespace FirstCS
                         j++;
                         continue;
                     }
-                    randomIndex = randomNumber.Next(0 + (15 * i), 15 + (15 * i));
+                    randomIndex = randomNumber.Next(0 + (minMaxRange * i), minMaxRange + (minMaxRange * i));
 
                     if (selectedIndices.Contains(randomIndex))
                     {
@@ -87,7 +93,6 @@ namespace FirstCS
             }
         }
     }
-
     class Program
     {
         BingoTable bingo = new BingoTable();
